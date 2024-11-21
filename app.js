@@ -24,3 +24,19 @@ dotenv.config({path:"./env/.env"})
 app.use("/resources", express.static("public"))
 app.use("/resources", express.static(__dirname + "/public"))
 
+
+
+// Establecer motor de plantillas
+app.set('view engine', 'ejs');
+
+// Invocamos al modulo para hashear la contraseña
+const bcryptjs = require("bcryptjs")
+
+
+// Variables de sesion
+const sesion = require("express-session")
+app.use(sesion({
+    secret:'secret',
+    resave: true,
+    saveUninitialized:true
+}))
