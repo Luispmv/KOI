@@ -3,13 +3,6 @@
 const express = require('express');
 const app = express()
 
-app.listen(3000, (req, res)=>{
-    console.log("Servidor corriendo en http://localhost:3000")
-})
-
-app.get("/", (req, res)=>{
-    res.send("Hola Mundo")
-})
 
 // Utilizando express url  para capturar los datos del formulario
 app.use(express.urlencoded({extended:false}))
@@ -47,3 +40,22 @@ app.use(sesion({
 
 // Invocamos al modulo de conexion a la base de datos
 const connection = require("./database/db")
+
+
+// Estableciendo rutas
+app.listen(3000, (req, res)=>{
+    console.log("Servidor corriendo en http://localhost:3000")
+})
+
+app.get("/", (req, res)=>{
+    res.render("index", {msg:"MENSAJE DESDE NODE"})
+})
+
+app.get("/register", (req, res)=>{
+    res.render("register")
+})
+
+
+app.get("/login", (req, res)=>{
+    res.render("login")
+})
