@@ -59,3 +59,25 @@ app.get("/register", (req, res)=>{
 app.get("/login", (req, res)=>{
     res.render("login")
 })
+
+
+// Metodos para registro de usuarios
+app.post('/register', async(req, res)=>{
+    const user = req.body.user;
+    const name = req.body.name;
+    const rol = req.body.rol;
+    const pass = req.body.pass;
+    // let passwordHash = await bcryptjs.hash(pass, 8);
+    connection.query('INSERT INTO usuarios SET ?', {
+        user:user,
+        name: name,
+        rol:rol,
+        password:pass
+    }, async(error, results)=>{
+        if(error){
+            console.log(error)
+        }else{
+            res.send('ALTA EXITOSA')
+        }
+    })
+})
