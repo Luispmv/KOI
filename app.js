@@ -17,6 +17,9 @@ dotenv.config({path:"./env/.env"})
 app.use("/resources", express.static("public"))
 app.use("/resources", express.static(__dirname + "/public"))
 
+app.use(express.urlencoded({ extended: true }));
+
+
 
 
 // Establecer motor de plantillas
@@ -77,10 +80,36 @@ app.post('/register', async(req, res)=>{
         if(error){
             console.log(error)
         }else{
-           res.send("REGISTRO EXITOSO")
+        //    res.send("REGISTRO EXITOSO")
+            res.render("register", {
+                alert:true,
+                alertTitle: "Registration",
+                alertMessage:"!Succesful Registration",
+                alertIcon: "success", 
+                showConfirmButton:false,
+                timer:1500,
+                ruta:''
+            })
         }
     })
 })
 
+app.post("/auth", async (req, res) => {
+    console.log(req.body);
+    const user = req.body.user;
+    const pass = req.body.pass;
+    let passwordHash = await bcryptjs.hash(pass, 8);
+    console.log(res)
+    if (user && pass) {
+        connection.query("SELECT * FROM usuarios WHERE user = ?", [user],
+            async (error, results) => {
+                if (results.length == 0 || pass !== results[0].password) {
+                    res.send("USUARIO O PASSWORD INCORRECTAS");
+                } else {
+                    res.send("LOGIN CORRECTO");
+                }
+            }
+        );
+    }
+});
 
-// BREAKPOINT COMMIT
