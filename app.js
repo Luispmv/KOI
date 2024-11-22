@@ -67,7 +67,7 @@ app.post('/register', async(req, res)=>{
     const name = req.body.name;
     const rol = req.body.rol;
     const pass = req.body.pass;
-    // let passwordHash = await bcryptjs.hash(pass, 8);
+    let passwordHash = await bcryptjs.hash(pass, 8);
     connection.query('INSERT INTO usuarios SET ?', {
         user:user,
         name: name,
