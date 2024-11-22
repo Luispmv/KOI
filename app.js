@@ -77,7 +77,10 @@ app.post('/register', async(req, res)=>{
         if(error){
             console.log(error)
         }else{
-            res.send('ALTA EXITOSA')
+           res.send("REGISTRO EXITOSO")
         }
     })
 })
+
+
+// BREAKPOINT COMMIT
