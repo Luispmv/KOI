@@ -43,3 +43,7 @@ app.use(sesion({
 
 
 // Breakpoint commit
+
+
+// Invocamos al modulo de conexion a la base de datos
+const connection = require("./database/db")
