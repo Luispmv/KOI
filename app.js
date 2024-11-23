@@ -104,12 +104,46 @@ app.post("/auth", async (req, res) => {
         connection.query("SELECT * FROM usuarios WHERE user = ?", [user],
             async (error, results) => {
                 if (results.length == 0 || pass !== results[0].password) {
-                    res.send("USUARIO O PASSWORD INCORRECTAS");
+                    // res.send("USUARIO O PASSWORD INCORRECTAS");
+                    res.render("login",{
+                        alert:true,
+                        alertTitle: "Error",
+                        alertMessage: "Usuario y/o password incorrectas",
+                        alertIcon: "error",
+                        showConfirmButton: true,
+                        timer: false,
+                        ruta: "login"
+                    })
                 } else {
-                    res.send("LOGIN CORRECTO");
+                    req.session.name = results[0].name
+                    // res.send("LOGIN CORRECTO");
+                    res.render("login",{
+                        alert:true,
+                        alertTitle: "Conexion Exitosa",
+                        alertMessage: "!Bienvenido!",
+                        alertIcon: "success",
+                        showConfirmButton: false,
+                        timer: 1500,
+                        ruta: ""
+                    })
                 }
             }
         );
+    }else{
+        // res.send("Por favor completa los campos")
+        res.render("login",{
+            alert:true,
+            alertTitle: "Advertencia",
+            alertMessage: "!Por favor ingresa tu usuario y contraseña!",
+            alertIcon: "warning",
+            showConfirmButton: true,
+            timer: false,
+            ruta: "login"
+        })
     }
 });
 
+
+
+
+// Autenticacion para las paginas
