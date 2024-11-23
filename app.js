@@ -42,16 +42,13 @@ app.use(sesion({
 
 
 // Invocamos al modulo de conexion a la base de datos
-const connection = require("./database/db")
+const connection = require("./database/db");
+const { name } = require('ejs');
 
 
 // Estableciendo rutas
 app.listen(3000, (req, res)=>{
     console.log("Servidor corriendo en http://localhost:3000")
-})
-
-app.get("/", (req, res)=>{
-    res.render("index", {msg:"MENSAJE DESDE NODE"})
 })
 
 app.get("/register", (req, res)=>{
@@ -115,6 +112,7 @@ app.post("/auth", async (req, res) => {
                         ruta: "login"
                     })
                 } else {
+                    req.session.loggedin = true
                     req.session.name = results[0].name
                     // res.send("LOGIN CORRECTO");
                     res.render("login",{
@@ -146,4 +144,26 @@ app.post("/auth", async (req, res) => {
 
 
 
-// Autenticacion para las paginas
+// Autenticacion para las paginas (SESION EN UNA PAGINA)
+app.get("/",(req, res)=>{
+    if(req.session.loggedin){
+        res.render('index',{
+            login: true,
+            name: req.session.name
+        })
+    }else{
+        res.render("index", {
+            login: false,
+            name: "Debe iniciar sesion"
+        })
+    }
+})
+
+
+
+// CERRRAR SESION
+app.get("/logout", (req, res)=>{
+    req.session.destroy(()=>{
+        res.redirect("/")
+    })
+})
