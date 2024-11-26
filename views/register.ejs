@@ -6,29 +6,61 @@
     <title>Registro</title>
     <link rel="stylesheet" href="resources/css/styles.css">
 </head>
+<style>
+    body{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: lightskyblue;
+    }
+    form{
+        display: flex;
+        flex-direction: column;
+        width: 300px;
+        gap: 10px;
+        background: white;
+        margin: auto;
+        padding: 3rem;
+    }
+    input{
+        padding: 15px;
+        border: 1px solid #ced4da;
+    }
+    input[type="submit"]{
+        background-color: lightgreen;
+        border: none;
+        font-weight: bold;
+        font-size: large;
+        color: #ffff;
+    }
+    select{
+        border: 1px solid #ced4da;
+    }
+</style>
 <body>
     <div class="register-form">
-        <h1>Form Registration</h1>
         <form action="register" method="POST" class="rf">
-            <label for="user">User name</label>
-            <input type="text" name="user" required>
+            <h1>Form Registration</h1>
+            <!-- <label for="user">User name</label> -->
+            <input type="text" name="user" required placeholder="Usuario">
 
-            <label for="user">Full name</label>
-            <input type="text" name="name" required>
+            <!-- <label for="user">Full name</label> -->
+            <input type="text" name="name" required placeholder="Nombre Completo">
 
 
-            <label for="rol">Rol</label>
+            <!-- <label for="rol">Rol</label> -->
             <select name="rol" id="rol" class="select-css">
                 <option value="admin">Admin</option>
                 <option value="data entry">Data Entry</option>
             </select>
 
-            <label for="pass">Password</label>
-            <input type="password" name="pass" required>
+            <!-- <label for="pass">Password</label> -->
+            <input type="password" name="pass" required placeholder="Contraseña">
 
-            <div style="display: inline;">
+            <div style="display: grid; gap: 10px;">
                 <a href="/" class="btn-cancel">Cancelar</a>
-                <input type="submit" value="Save" class="btn-save">
+                <input type="submit" value="Registrarme" class="btn-save">
             </div>
         </form>
     </div>
