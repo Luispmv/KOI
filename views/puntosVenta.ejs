@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Puntos Venta</title>
+    <link rel="stylesheet" href="resources/css/styles.css">
+</head>
+<style>
+         body{
+        flex-direction: column;
+        justify-content: center;
+        height: 100vh;
+    }
+    .buttons-container{
+        align-self: center;
+        display: flex;
+        justify-content: space-around;
+        width: 60%;
+    }
+    nav{
+        display: flex;
+        justify-content: space-around;
+        background-color: rgb(124 189 246);
+        align-items: center;
+        width: 100%;
+    }
+    .buttons-container a{
+        width: 250px;
+        height: 250px;
+        -webkit-appearance: button;
+        background-color: rgb(124 189 246);
+        color: white;
+        text-decoration: none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+    }
+    h2{
+        color: white;
+    }
+    .user-info-container{
+        display: flex;
+    }
+    figure{
+        width: 50px;
+        height: 50px;
+        background-color: white;
+        border-radius: 100%;
+    }
+    .a-logout{
+    width: 150px;
+    background-color: white;
+    color: rgb(69, 139, 200);
+    text-decoration: none;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+main{
+}
+iframe{
+    width: 100%;
+}
+section{
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+.sucursal-item{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #7cbdf6;
+    padding: 1rem;
+    width: 70%;
+    justify-content: space-between;
+    color: white;
+}
+.sucursal-item a{
+    background: white;
+    text-decoration: none;
+    height: 50px;
+    width: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+</style>
+<body>
+    <% if (login) { %>
+        <nav>
+            <div class="user-info-container">
+                <a href="/">
+                    <figure></figure>
+                </a>
+                <h2><strong><%= name %></strong></h2>
+            </div>
+            <a href="logout" class="a-logout">Cerrar Sesion</a>
+        </nav>
+
+        <main>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d59549.85794235107!2d-101.73859455136724!3d21.117903000000002!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x842bbf000a1f1737%3A0x29ac8d5fb4cf7e5e!2sMcDonald&#39;s!5e0!3m2!1ses!2smx!4v1732605453385!5m2!1ses!2smx" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            <section>
+                <article class="sucursal-item">
+                    <aside>
+                        <h3>Sucursal Palmas</h3>
+                        <span>9:00am - 8:00pm</span>
+                    </aside>
+                    <a href="">Seleccionar</a>
+                </article>
+                <article class="sucursal-item">
+                    <aside>
+                        <h3>Sucursal Palmas</h3>
+                        <span>9:00am - 8:00pm</span>
+                    </aside>
+                    <a href="">Seleccionar</a>
+                </article>
+                <article class="sucursal-item">
+                    <aside>
+                        <h3>Sucursal Palmas</h3>
+                        <span>9:00am - 8:00pm</span>
+                    </aside>
+                    <a href="">Seleccionar</a>
+                </article>
+            </section>
+        </main>
+    <% } else { %>
+        <p>Por favor, inicia sesión para acceder al catálogo.</p>
+    <% } %>
+</body>
+</html>

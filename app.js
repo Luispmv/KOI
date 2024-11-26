@@ -3,6 +3,9 @@
 const express = require('express');
 const app = express()
 
+// Invocamos a axios
+const axios = require('axios');
+
 
 // Utilizando express url  para capturar los datos del formulario
 app.use(express.urlencoded({extended:false}))
@@ -59,6 +62,68 @@ app.get("/register", (req, res)=>{
 app.get("/login", (req, res)=>{
     res.render("login")
 })
+
+
+// app.get("/catalogo", (req, res) => {
+//     if (req.session.loggedin) {
+//         res.render("catalogo", {
+//             login: true,
+//             name: req.session.name, // Pasamos el nombre del usuario
+//         });
+//     } else {
+//         res.render("catalogo", {
+//             login: false,
+//             name: null, // Puedes ajustar esto según lo que quieras mostrar
+//         });
+//     }
+// });
+
+app.get("/puntosVenta", (req, res)=>{
+    if(req.session.loggedin){
+        res.render("puntosVenta",{
+            login: true,
+            name: req.session.name,
+        })
+    }else{
+        res.render("catalogo", {
+            login: false,
+            name: null
+        })
+    }
+})
+
+app.get("/catalogo", async (req, res) => {
+    try {
+        if (req.session.loggedin) {
+            // Llamada a la API para obtener los productos
+            const apiResponse = await axios.get('https://api.escuelajs.co/api/v1/products'); 
+            const productos = apiResponse.data; 
+
+            // Renderizamos la vista con los datos del usuario y los productos
+            res.render("catalogo", {
+                login: true,
+                name: req.session.name, 
+                productos,
+            });
+        } else {
+            // Si el usuario no está autenticado, mostramos un mensaje
+            res.render("catalogo", {
+                login: false,
+                name: null,
+                productos: [], 
+            });
+        }
+    } catch (error) {
+        console.error("Error al obtener los productos de la API:", error.message);
+
+        res.render("catalogo", {
+            login: req.session.loggedin || false,
+            name: req.session.name || null,
+            productos: [],
+        });
+    }
+});
+
 
 
 // Metodos para registro de usuarios
@@ -154,7 +219,7 @@ app.get("/",(req, res)=>{
     }else{
         res.render("index", {
             login: false,
-            name: "Debe iniciar sesion"
+            name: "Bienvendio a KOI"
         })
     }
 })

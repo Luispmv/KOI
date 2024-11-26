@@ -7,6 +7,8 @@ body{
 .login-form, .container{
     width: 300px;
     margin: 0 auto;
+    padding: 3rem;
+    background-color: white;
 }
 
 .login-form h1{
@@ -51,4 +53,15 @@ body{
     text-decoration: none;
 
     -webkit-appearance: button;
+}
+
+.a-logout{
+    width: 150px;
+    background-color: white;
+    color: rgb(69, 139, 200);
+    text-decoration: none;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
