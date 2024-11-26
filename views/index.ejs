@@ -5,12 +5,79 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="resources/css/styles.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=inventory_2" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=map" />
 </head>
+<style>
+    body{
+        flex-direction: column;
+        justify-content: center;
+        height: 100vh;
+    }
+    .buttons-container{
+        align-self: center;
+        display: flex;
+        justify-content: space-around;
+        width: 60%;
+    }
+    nav{
+        display: flex;
+        justify-content: space-around;
+        background-color: rgb(124 189 246);
+        align-items: center;
+        position: absolute;
+        width: 100%;
+    }
+    .buttons-container a{
+        width: 250px;
+        height: 250px;
+        -webkit-appearance: button;
+        background-color: rgb(124 189 246);
+        color: white;
+        text-decoration: none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+    }
+    h2{
+        color: white;
+    }
+    .user-info-container{
+        display: flex;
+    }
+    figure{
+        width: 50px;
+        height: 50px;
+        background-color: white;
+        border-radius: 100%;
+    }
+</style>
 <body>
-    <h1>Pagina de inicio</h1>
     <% if (login){ %>
-        <h2>El usuario conectado es: <strong><%= name %></strong></h2>
-        <a href="logout" class="a-logout">Logout</a>
+        <nav>
+            <div class="user-info-container">
+                <figure></figure>
+                <h2><strong><%= name %></strong></h2>
+            </div>
+            <a href="logout" class="a-logout">Logout</a>
+        </nav>
+
+        <div class="buttons-container">
+            <a href="catalogo">
+                <span class="material-symbols-outlined">
+                    inventory_2
+                </span>    
+                Catalogo
+            </a>
+            <a href="">
+                <span class="material-symbols-outlined">
+                    map
+                    </span>
+                Puntos de Venta
+            </a>
+        </div>
+
         <%} else{ %>
             <h1><strong><%= name  %></strong></h1>
             <a href="login" class="a-login">Ir al LOGIN</a>
