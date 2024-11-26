@@ -61,6 +61,21 @@ app.get("/login", (req, res)=>{
 })
 
 
+app.get("/catalogo", (req, res) => {
+    if (req.session.loggedin) {
+        res.render("catalogo", {
+            login: true,
+            name: req.session.name, // Pasamos el nombre del usuario
+        });
+    } else {
+        res.render("catalogo", {
+            login: false,
+            name: null, // Puedes ajustar esto según lo que quieras mostrar
+        });
+    }
+});
+
+
 // Metodos para registro de usuarios
 app.post('/register', async(req, res)=>{
     const user = req.body.user;
@@ -154,7 +169,7 @@ app.get("/",(req, res)=>{
     }else{
         res.render("index", {
             login: false,
-            name: "Debe iniciar sesion"
+            name: "Bienvendio a KOI"
         })
     }
 })
