@@ -50,9 +50,18 @@ const { name } = require('ejs');
 
 
 // Estableciendo rutas
-app.listen(3000, (req, res)=>{
-    console.log("Servidor corriendo en http://localhost:3000")
-})
+
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => {
+    console.log(`Servidor corriendo en el puerto ${PORT}`);
+});
+
+
+
+// app.listen(3000, (req, res)=>{
+//     console.log("Servidor corriendo en http://localhost:3000")
+// })
 
 app.get("/register", (req, res)=>{
     res.render("register")
