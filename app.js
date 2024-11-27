@@ -78,6 +78,8 @@ app.get("/login", (req, res)=>{
 //     }
 // });
 
+//BREAKPOINT COMMIT
+
 app.get("/puntosVenta", (req, res)=>{
     if(req.session.loggedin){
         res.render("puntosVenta",{
