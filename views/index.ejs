@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Inicio</title>
     <link rel="stylesheet" href="resources/css/styles.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=inventory_2" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=map" />
@@ -11,7 +11,6 @@
 <style>
     body{
         flex-direction: column;
-        justify-content: center;
         height: 100vh;
         display: flex;
         flex-direction: column;
@@ -22,6 +21,7 @@
         justify-content: space-around;
         width: 60%;
         margin: auto;
+        gap: 20px;
     }
     nav{
         display: flex;
@@ -47,12 +47,19 @@
     }
     .user-info-container{
         display: flex;
+        align-items: center;
+        gap: 15px;
     }
     figure{
+        margin: 0;
         width: 50px;
         height: 50px;
         background-color: white;
         border-radius: 100%;
+        background-image: url(https://cdn-icons-png.freepik.com/512/9141/9141946.png);
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
     }
 
     .btn-login{
@@ -80,6 +87,126 @@
     display: flex;
     gap: 30px;
 }
+
+main{
+    margin-top: 88px; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    place-self: center;
+}
+
+.hero-container{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    max-width: 1536px;
+}
+.hero-img{
+    width: 50%;
+    object-fit: cover;
+}
+.hero-text{
+    background-color: white;
+    width: 50%;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: rgb(69, 139, 200);
+}
+.hero-text h1{
+    margin: 0;
+}
+.section2{
+    display: flex;
+    flex-direction: column;
+    color: white
+}
+iframe{
+    width: 90%;
+    max-width: 1536px;
+    place-self: center;
+}
+.sucursal-btn{
+    margin-top: 10px;
+    width: 200px;
+    background-color: white;
+    color: rgb(69, 139, 200);
+    text-decoration: none;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    place-self: center;
+    margin-bottom: 25px;
+}
+
+.footer {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    background-color: rgb(69, 139, 200);
+    color: white;
+    padding: 20px;
+}
+
+.footer-column {
+    display: flex;
+    flex-direction: column;
+}
+
+.footer-column a {
+    text-align: left;
+    color: white;
+    text-decoration: none;
+    margin: 5px 0;
+    font-size: 14px;
+    transition: color 0.3s ease;
+}
+
+
+
+@media(max-width:768px){
+    .btn-login{
+        font-size: 7px;
+        height: 20px;
+        width: 90px;
+    }
+    .btn-register{
+        font-size: 7px;
+        height: 20px;
+        width: 90px;
+    }
+
+    figure{
+        width: 25px;
+        height: 25px;
+    }
+    .a-logout{
+        height: 20px;
+        width: 90px;
+        font-size: 7px;
+    }
+    .buttons-container{
+        display: grid;
+        width: auto;
+        gap: 10px;
+    }
+    .hero-container{
+    display: grid;
+    width: 100%;
+    }
+    .hero-img{
+        width: 100%;
+    }
+    .hero-text{
+        width: 95%;
+        padding: 0;
+        margin: auto;
+    }
+    }
 </style>
 <body>
     <% if (login){ %>
@@ -107,7 +234,7 @@
         </div>
 
         <%} else{ %>
-            <nav style="position: absolute; top: 0; padding: 1rem;">
+            <nav style="position: absolute; top: 0; padding-top: 1rem;">
                 <h2>
                     KOI
                 </h2>
@@ -116,6 +243,40 @@
                     <a href="register" class="btn-register">Registrarme</a>
                 </div>
             </nav>
+
+            <main>
+                <section class="hero-container" style="">
+                    <img  class="hero-img" src="https://images.pexels.com/photos/927022/pexels-photo-927022.jpeg?auto=compress&cs=tinysrgb&w=600" alt="">
+                    <div class="hero-text">
+                        <h1 style="font-size: 3rem; text-align: left;">Encuentra los puntos de venta mas cercanos</h1>
+                        <p style="text-align: justify;">
+                            Nuestro software es una solución intuitiva y eficiente diseñada para ayudarte a encontrar puntos de venta cercanos según tu ubicación actual. Ideal para quienes buscan productos, servicios o establecimientos específicos de manera rápida y precisa
+                        </p>
+                    </div>
+                </section>
+                <article class="section2" style="background-color: #7cbdf6;">
+                    <h1>Encuentra la sucursal mas cercana a ti</h1>
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d28996.741793501806!2d-101.68981683084112!3d21.107303366825974!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x842bbeffd6e6e721%3A0x606d95ec61a54327!2sLe%C3%B3n%20de%20los%20Aldama%2C%20Gto.!5e0!3m2!1ses!2smx!4v1732685219381!5m2!1ses!2smx" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    <a class="sucursal-btn" href="login">Encontrar una sucursal</a>
+                </article>
+            </main>
+            <footer class="footer">
+                <div class="footer-column">
+                    <a href="#link1">Contacto</a>
+                    <a href="#link2">Sobre Nosotros</a>
+                    <a href="#link3">Redes Sociales</a>
+                </div>
+                <div class="footer-column">
+                    <a href="#link4">FAQ</a>
+                    <a href="#link5">Paises</a>
+                    <a href="#link6">Idiomas</a>
+                </div>
+                <div class="footer-column">
+                    <a href="#link7">Empresa</a>
+                    <a href="#link8">Bolsa de trabajo</a>
+                </div>
+            </footer>
+
         <% } %>
 
 </body>

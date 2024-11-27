@@ -43,12 +43,19 @@
     }
     .user-info-container{
         display: flex;
+        align-items: center;
+        gap: 10px;
     }
     figure{
         width: 50px;
         height: 50px;
         background-color: white;
         border-radius: 100%;
+        margin: 0;
+        background-image: url(https://cdn-icons-png.freepik.com/512/9141/9141946.png);
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
     }
     .a-logout{
     width: 150px;
@@ -97,6 +104,33 @@ main{
     justify-content: center;
     align-items: center;
 }
+
+@media(max-width:625px){
+    .btn-login{
+        font-size: 7px;
+        height: 20px;
+        width: 90px;
+    }
+    .btn-register{
+        font-size: 7px;
+        height: 20px;
+        width: 90px;
+    }
+
+    figure{
+        width: 25px;
+        height: 25px;
+    }
+    .a-logout{
+        height: 20px;
+        width: 90px;
+        font-size: 7px;
+    }
+    main{
+        grid-template-columns: repeat(2,1fr);
+    }
+}
+
 </style>
 <body>
     <!-- <% if (login) { %>
@@ -132,8 +166,8 @@ main{
         <main>
             <% productos.forEach(producto => { %>
                 <div class="card">
-                    <!-- <img src="<%= producto.images[0] %>" alt="<%= producto.title %>"> -->
-                    <img src="<%= producto.category.image %>" alt="Imagen de la categoría">
+                    <img src="<%= producto.images[0] %>" alt="<%= producto.title %>">
+                    <!-- <img src="<%= producto.category.image %>" alt="Imagen de la categoría"> -->
                     <h3><%= producto.title %></h3>
                     <a class="producto-info-btn" href="/productos/<%= producto.id %>">Ver producto</a>
                 </div>
