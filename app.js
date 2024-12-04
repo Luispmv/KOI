@@ -65,6 +65,36 @@ app.get("/puntosVenta", (req, res) => {
     }
 });
 
+// app.get("/dashboard", (req, res)=>{
+//     if (req.session.loggedin) {
+//         res.render("dashboard", {
+//             login: true,
+//             name: req.session.name,
+//         });
+//     } else {
+//         res.render("catalogo", {
+//             login: false,
+//             name: null
+//         });
+//     }
+// })
+
+app.get("/dashboard", (req, res) => {
+    console.log("Session:", req.session);
+    if (req.session.loggedin) {
+        res.render("dashboard", {
+            login: true,
+            name: req.session.name,
+        });
+    } else {
+        res.render("catalogo", {
+            login: false,
+            name: null
+        });
+    }
+});
+
+
 app.get("/catalogo", async (req, res) => {
     try {
         if (req.session.loggedin) {
