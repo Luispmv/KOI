@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Sucursal</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <link rel="stylesheet" href="resources/css/styles.css">
+</head>
+<style>
+    nav {
+        display: flex;
+        justify-content: space-around;
+        background-color: rgb(124, 189, 246);
+        align-items: center;
+        width: 100%;
+    }
+    .user-info-container {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    figure {
+        width: 50px;
+        height: 50px;
+        background-color: white;
+        border-radius: 100%;
+        margin: 0;
+        background-image: url(https://cdn-icons-png.freepik.com/512/9141/9141946.png);
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+    h2 {
+        color: white;
+    }
+    .a-logout {
+        width: 150px;
+        background-color: white;
+        color: rgb(69, 139, 200);
+        text-decoration: none;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    main {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .chart-container {
+        width: 100%;
+        height: 300px;
+        background-color: white;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 10px;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .chart-container svg {
+        width: 100%;
+        height: 200px;
+    }
+
+    .chart-description {
+        text-align: center;
+        font-size: 14px;
+        color: #555;
+        margin-top: 10px;
+    }
+
+    @media(max-width:728px) {
+        figure {
+            width: 25px;
+            height: 25px;
+        }
+        .a-logout {
+            height: 20px;
+            width: 90px;
+            font-size: 7px;
+        }
+        main {
+            grid-template-columns: repeat(1, 1fr);
+        }
+    }
+</style>
+<body>
+    <nav>
+        <div class="user-info-container">
+            <a href="/">
+                <figure></figure>
+            </a>
+            <h2><strong><%= name %></strong></h2>
+        </div>
+        <a href="logout" class="a-logout">Cerrar Sesión</a>
+    </nav>
+    <main>
+        <div class="chart-container">
+            <div id="chart1"></div>
+            <p class="chart-description">Ventas mensuales en diferentes sucursales.</p>
+        </div>
+        <div class="chart-container">
+            <div id="chart2"></div>
+            <p class="chart-description">Distribución porcentual de categorías de productos vendidos.</p>
+        </div>
+        <div class="chart-container">
+            <div id="chart3"></div>
+            <p class="chart-description">Tendencia de ingresos mensuales a lo largo del año.</p>
+        </div>
+        <div class="chart-container">
+            <div id="chart4"></div>
+            <p class="chart-description">Porcentaje de cumplimiento de objetivos por región.</p>
+        </div>
+    </main>
+
+    <script>
+        // Gráfico de barras
+        function createBarChart(containerId, data, labels) {
+            const svg = d3.select(`#${containerId}`)
+                .append("svg")
+                .attr("viewBox", "0 0 300 200")
+                .append("g")
+                .attr("transform", "translate(30,10)");
+
+            const x = d3.scaleBand()
+                .domain(labels)
+                .range([0, 240])
+                .padding(0.3);
+
+            const y = d3.scaleLinear()
+                .domain([0, d3.max(data)])
+                .range([160, 0]);
+
+            svg.append("g")
+                .attr("transform", "translate(0,160)")
+                .call(d3.axisBottom(x));
+
+            svg.append("g").call(d3.axisLeft(y));
+
+            svg.selectAll(".bar")
+                .data(data)
+                .enter()
+                .append("rect")
+                .attr("x", (d, i) => x(labels[i]))
+                .attr("y", d => y(d))
+                .attr("width", x.bandwidth())
+                .attr("height", d => 160 - y(d))
+                .attr("fill", "steelblue");
+
+            // Añadir los números sobre las barras
+            svg.selectAll(".text")
+                .data(data)
+                .enter()
+                .append("text")
+                .attr("x", (d, i) => x(labels[i]) + x.bandwidth() / 2)
+                .attr("y", d => y(d) - 5)
+                .attr("text-anchor", "middle")
+                .attr("fill", "black")
+                .text(d => d);
+        }
+
+        // Gráfico de dona
+        function createDonutChart(containerId, data) {
+            const svg = d3.select(`#${containerId}`)
+                .append("svg")
+                .attr("viewBox", "0 0 300 200")
+                .append("g")
+                .attr("transform", "translate(150,100)");
+
+            const radius = 80;
+            const color = d3.scaleOrdinal(d3.schemeCategory10);
+
+            const pie = d3.pie()(data);
+            const arc = d3.arc()
+                .innerRadius(radius * 0.5)
+                .outerRadius(radius);
+
+            const arcs = svg.selectAll("path")
+                .data(pie)
+                .enter()
+                .append("path")
+                .attr("d", arc)
+                .attr("fill", (d, i) => color(i));
+
+            // Añadir los números en el centro de la dona
+            svg.selectAll(".label")
+                .data(pie)
+                .enter()
+                .append("text")
+                .attr("transform", (d) => `translate(${arc.centroid(d)})`)
+                .attr("text-anchor", "middle")
+                .attr("fill", "white")
+                .text(d => `${Math.round(d.data)}%`);
+        }
+
+        // Datos y etiquetas
+        const data1 = [30, 50, 70, 20];
+        const labels1 = ["Sucursal 1", "Sucursal 2", "Sucursal 3", "Sucursal 4"];
+        const data2 = [80, 20, 60, 40];
+
+        // Crear gráficos
+        createBarChart("chart1", data1, labels1);
+        createDonutChart("chart2", data2);
+        createBarChart("chart3", data2, labels1);
+        createDonutChart("chart4", data1);
+    </script>
+</body>
+</html>
+
